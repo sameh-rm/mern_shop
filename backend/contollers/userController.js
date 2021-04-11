@@ -62,17 +62,18 @@ export const updateUserProfile = asyncHandler(async (req, res) => {
         throw new Error("your current password is wrong");
       }
     }
-    const updatedUser = await user.save();
-    res.json(
-      {
+    try {
+      const updatedUser = await user.save();
+      res.status(200).json({
         _id: updatedUser._id,
         name: updatedUser.name,
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
         token: generateToken(updatedUser._id),
-      },
-      200
-    );
+      });
+    } catch (error) {
+      console.log(error);
+    }
   } else {
     res.status(404);
     throw new Error("User Not Found");

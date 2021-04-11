@@ -14,7 +14,7 @@ const ProfilePage = ({ history, location }) => {
   //   const redirect = location.search ? location.search.split("=")[1] : "/";
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.user);
-  const { loading, error, userDetails, message } = useSelector(
+  const { loading, error, message, userDetails } = useSelector(
     (state) => state.userDetails
   );
   useEffect(() => {
@@ -24,8 +24,8 @@ const ProfilePage = ({ history, location }) => {
       if (!userDetails) {
         dispatch(getUserDetails());
       } else {
-        setName(userInfo.name);
-        setEmail(userInfo.email);
+        setName(userDetails.name);
+        setEmail(userDetails.email);
       }
     }
   }, [history, dispatch, userInfo, userDetails]);
@@ -57,7 +57,6 @@ const ProfilePage = ({ history, location }) => {
               <Form.Group controlId="name">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
-                  required
                   type="text"
                   placholed="Enter your name"
                   value={name}
@@ -68,7 +67,6 @@ const ProfilePage = ({ history, location }) => {
               <Form.Group controlId="email">
                 <Form.Label>Email Address</Form.Label>
                 <Form.Control
-                  required
                   type="email"
                   placholed="Enter Email"
                   value={email}
@@ -79,7 +77,6 @@ const ProfilePage = ({ history, location }) => {
               <Form.Group controlId="currentPassword">
                 <Form.Label>Current Password</Form.Label>
                 <Form.Control
-                  required
                   type="password"
                   placholed="Enter Password"
                   value={currentPassword}
@@ -90,7 +87,6 @@ const ProfilePage = ({ history, location }) => {
               <Form.Group controlId="password">
                 <Form.Label>New Password</Form.Label>
                 <Form.Control
-                  required
                   type="password"
                   placholed="Enter Password"
                   value={password}
@@ -101,7 +97,6 @@ const ProfilePage = ({ history, location }) => {
               <Form.Group controlId="confirmPassword">
                 <Form.Label>Confirm New Password</Form.Label>
                 <Form.Control
-                  required
                   type="password"
                   placholed="Confirm Password"
                   value={confirmPassword}

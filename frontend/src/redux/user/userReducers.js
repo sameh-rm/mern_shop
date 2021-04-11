@@ -24,33 +24,33 @@ export const userReducer = (state = { userDetails: {} }, action) => {
   }
 };
 
-export const userDetailsReducer = (state = { userDetails: {} }, action) => {
+export const userDetailsReducer = (
+  state = { userDetails: undefined },
+  action
+) => {
   switch (action.type) {
     // USER DETAILS CASES
     case userActionTypes.USER_DETAILS_REQUEST:
       return { ...state, loading: true };
     case userActionTypes.USER_DETAILS_SUCCESS:
-      console.log(state);
       return {
-        ...state,
         loading: false,
         userDetails: action.payload,
       };
     case userActionTypes.USER_DETAILS_FAILED:
-      return { ...state, loading: false, error: action.payload };
+      return { loading: false, error: action.payload };
 
     // UPDATE USER DETAILS CASES
     case userActionTypes.USER_UPDATE_REQUEST:
       return { ...state, loading: true };
     case userActionTypes.USER_UPDATE_SUCCESS:
       return {
-        ...state,
         loading: false,
         userDetails: action.payload,
-        message: "Your profile was updated successfully!",
+        message: "Profile Updated!",
       };
     case userActionTypes.USER_UPDATE_FAILED:
-      return { ...state, loading: false, error: action.payload };
+      return { loading: false, error: action.payload };
 
     default:
       return state;

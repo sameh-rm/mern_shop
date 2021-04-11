@@ -139,6 +139,7 @@ export const updateUserDetails = (
       config
     );
     dispatch(updateUserDetailsSuccess(data));
+    dispatch(userLoginSuccess(data));
   } catch (err) {
     console.error(err);
     dispatch(updateUserDetailsFailed(err));
